@@ -1,4 +1,13 @@
+import React from 'react';
+
 export default function Card() {
+	const [count, setCount] = React.useState(0);
+
+	const onAddCountPizza = () => {
+		setCount(count + 1);
+		console.log(count + 1);
+	};
+
 	return (
 		<div className="pizza-block">
 			<img
@@ -20,7 +29,7 @@ export default function Card() {
 			</div>
 			<div className="pizza-block__bottom">
 				<div className="pizza-block__price">от 395 ₽</div>
-				<div className="button button--outline button--add">
+				<button onClick={onAddCountPizza} className="button button--outline button--add">
 					<svg
 						width="12"
 						height="12"
@@ -33,8 +42,8 @@ export default function Card() {
 						/>
 					</svg>
 					<span>Добавить</span>
-					<i>2</i>
-				</div>
+					<i>{count}</i>
+				</button>
 			</div>
 		</div>
 	);
