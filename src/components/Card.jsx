@@ -13,9 +13,10 @@ export default function Card({ title, imageUrl, types, sizes, price }) {
 			<h4 className="pizza-block__title">{title}</h4>
 			<div className="pizza-block__selector">
 				<ul>
-					{types.map(type => {
+					{types.map((type, index) => {
 						return (
 							<li
+								key={index}
 								onClick={() => setActiveClassType(type)}
 								className={activeClassType === type ? 'active' : ''}>
 								{typesName[type]}
@@ -27,6 +28,7 @@ export default function Card({ title, imageUrl, types, sizes, price }) {
 					{sizes.map((size, index) => {
 						return (
 							<li
+								key={size}
 								onClick={() => setActiveClassSize(index)}
 								className={activeClassSize === index ? 'active' : ''}>
 								{size} см.
