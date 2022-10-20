@@ -1,9 +1,11 @@
 import React from 'react';
 
-import Categories from '../components/Categories';
-import Sort from '../components/Sort';
-import Card from '../components/Card/Card';
-import Loading from '../components/Loading';
+import Categories from '../../components/Categories';
+import Sort from '../../components/Sort';
+import Card from '../../components/Card';
+import Loading from '../../components/Loading';
+
+import styles from './Home.module.scss';
 
 import axios from 'axios';
 
@@ -19,13 +21,13 @@ export default function Home() {
 	}, []);
 
 	return (
-		<div className="content">
-			<div className="container">
-				<div className="content__top">
-					<Categories />
-					<Sort />
-				</div>
-				<h2 className="content__title">Все пиццы</h2>
+		<div className="container">
+			<div className="content__top">
+				<Categories />
+				<Sort />
+			</div>
+			<h2 className="content__title">Все пиццы</h2>
+			<div className={styles.content}>
 				<div className="content__items">
 					{isLoading
 						? [...new Array(6)].map((_, index) => <Loading key={index} />)
