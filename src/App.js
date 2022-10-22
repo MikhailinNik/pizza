@@ -15,7 +15,7 @@ function App() {
 			<div className="content">
 				<Routes>
 					<Route path="/" element={<Home />} />
-					<Route path="/:id" element={<NotFoundPage />} />
+					<Route path="*" element={<NotFoundPage />} />
 					<Route path="/cart" element={<Cart />} />
 				</Routes>
 			</div>

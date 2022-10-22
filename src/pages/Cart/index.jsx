@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import styles from './Cart.module.scss';
 
 export default function Cart() {
 	return (
@@ -77,7 +78,7 @@ export default function Cart() {
 						<span>Очистить корзину</span>
 					</div>
 				</div>
-				<div className="content__items">
+				<div className={styles.cart}>
 					<div className="cart__item">
 						<div className="cart__item-img">
 							<img

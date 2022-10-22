@@ -12,19 +12,28 @@ import axios from 'axios';
 export default function Home() {
 	const [items, setItems] = React.useState([]);
 	const [isLoading, setIsLoading] = React.useState(true);
+	const [categoryId, setCategoryId] = React.useState(0);
+	const [sortProperty, setSortProperty] = React.useState({
+		name: 'поплуярности',
+		sort: 'rating',
+	});
+
+	const isCategory = categoryId > 0 ? `category=${categoryId}` : '';
+	const isSort = `_sort=${sortProperty.sort}&_order=desc`;
 
 	React.useEffect(() => {
-		axios.get('https://run.mocky.io/v3/9aa40876-5105-43f2-90d5-e264152e0c33').then(res => {
+		setIsLoading(true);
+		axios.get(`http://localhost:3001/data?${isCategory}&${isSort}`).then(res => {
 			setItems(res.data);
 			setIsLoading(false);
 		});
-	}, []);
+	}, [categoryId, sortProperty]);
 
 	return (
 		<div className="container">
 			<div className="content__top">
-				<Categories />
-				<Sort />
+				<Categories value={categoryId} onChangeCategory={index => setCategoryId(index)} />
+				<Sort value={sortProperty} onChangeSort={index => setSortProperty(index)} />
 			</div>
 			<h2 className="content__title">Все пиццы</h2>
 			<div className={styles.content}>
