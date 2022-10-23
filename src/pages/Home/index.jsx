@@ -4,6 +4,7 @@ import Categories from '../../components/Categories';
 import Sort from '../../components/Sort';
 import Card from '../../components/Card';
 import Loading from '../../components/Loading';
+import Pagination from '../../components/Pagination';
 
 import styles from './Home.module.scss';
 
@@ -17,6 +18,7 @@ export default function Home({ searchValue }) {
 		name: 'поплуярности',
 		sort: 'rating',
 	});
+	const [currentPage, setCurrentPage] = React.useState(1);
 
 	const isCategory = categoryId > 0 ? `category=${categoryId}` : '';
 	const isSort = `_sort=${sortProperty.sort}&_order=desc`;
@@ -24,15 +26,17 @@ export default function Home({ searchValue }) {
 
 	React.useEffect(() => {
 		setIsLoading(true);
-		axios.get(`http://localhost:3001/data?${isCategory}&${isSort}${isSearch}`).then(res => {
-			setItems(res.data);
-			setIsLoading(false);
-		});
-	}, [categoryId, sortProperty, searchValue]);
+		axios
+			.get(
+				`http://localhost:3001/data?_page=${currentPage}&_limit=4&${isCategory}&${isSort}${isSearch}`,
+			)
+			.then(res => {
+				setItems(res.data);
+				setIsLoading(false);
+			});
+	}, [categoryId, sortProperty, searchValue, currentPage]);
 
-	const search = items
-		// .filter(item => (item.title.toLowerCase().includes(searchValue.toLowerCase()) ? true : false))
-		.map(obj => <Card key={obj.id} {...obj} />);
+	const search = items.map(obj => <Card key={obj.id} {...obj} />);
 
 	return (
 		<div className="container">
@@ -46,6 +50,7 @@ export default function Home({ searchValue }) {
 					{isLoading ? [...new Array(6)].map((_, index) => <Loading key={index} />) : search}
 				</div>
 			</div>
+			<Pagination onChangePage={number => setCurrentPage(number + 1)} />
 		</div>
 	);
 }
