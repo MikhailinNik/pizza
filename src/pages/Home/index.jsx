@@ -5,12 +5,14 @@ import Sort from '../../components/Sort';
 import Card from '../../components/Card';
 import Loading from '../../components/Loading';
 import Pagination from '../../components/Pagination';
+import { SearchContext } from '../../App';
 
 import styles from './Home.module.scss';
 
 import axios from 'axios';
 
-export default function Home({ searchValue }) {
+export default function Home() {
+	const { searchValue } = React.useContext(SearchContext);
 	const [items, setItems] = React.useState([]);
 	const [isLoading, setIsLoading] = React.useState(true);
 	const [categoryId, setCategoryId] = React.useState(0);
@@ -20,11 +22,11 @@ export default function Home({ searchValue }) {
 	});
 	const [currentPage, setCurrentPage] = React.useState(1);
 
-	const isCategory = categoryId > 0 ? `category=${categoryId}` : '';
-	const isSort = `_sort=${sortProperty.sort}&_order=desc`;
-	const isSearch = searchValue ? `&q=${searchValue.toLowerCase()}` : '';
-
 	React.useEffect(() => {
+		const isCategory = categoryId > 0 ? `category=${categoryId}` : '';
+		const isSort = `_sort=${sortProperty.sort}&_order=desc`;
+		const isSearch = searchValue ? `&q=${searchValue.toLowerCase()}` : '';
+
 		setIsLoading(true);
 		axios
 			.get(
