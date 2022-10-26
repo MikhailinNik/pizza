@@ -9,6 +9,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import Cart from './pages/Cart';
 
 export const SearchContext = React.createContext();
+
 function App() {
 	const [searchValue, setSearchValue] = React.useState('');
 
