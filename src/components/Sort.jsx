@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
 import { setSort } from '../redux/slices/filterSlice';
 
 const sortNameList = [
@@ -48,7 +49,6 @@ export default function Sort() {
 				<div className="sort__popup">
 					<ul>
 						{sortNameList.map((obj, index) => {
-							console.log(obj);
 							return (
 								<li
 									key={index}

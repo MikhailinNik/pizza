@@ -1,5 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+
 import { setCurrentPage } from '../../redux/slices/filterSlice';
 
 import Categories from '../../components/Categories';
@@ -11,20 +13,18 @@ import { SearchContext } from '../../App';
 
 import styles from './Home.module.scss';
 
-import axios from 'axios';
-
 export default function Home() {
 	const dispatch = useDispatch();
 	const { categoryId, sort, currentPage } = useSelector(state => state.filter);
 	const { searchValue } = React.useContext(SearchContext);
 	const [items, setItems] = React.useState([]);
 	const [isLoading, setIsLoading] = React.useState(true);
-	// const [currentPage, setCurrentPage] = React.useState(1);
 
 	const onChangeCurrentPage = number => {
 		dispatch(setCurrentPage(number));
 		console.log('current page: ' + currentPage);
 	};
+
 	React.useEffect(() => {
 		const isCategory = categoryId > 0 ? `category=${categoryId}` : '';
 		const isSort = `_sort=${sort.sortProperty}&_order=desc`;
