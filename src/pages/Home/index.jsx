@@ -22,7 +22,6 @@ export default function Home() {
 
 	const onChangeCurrentPage = number => {
 		dispatch(setCurrentPage(number));
-		console.log('current page: ' + currentPage);
 	};
 
 	React.useEffect(() => {
