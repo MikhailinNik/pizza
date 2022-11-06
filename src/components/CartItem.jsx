@@ -1,9 +1,8 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { removeItem, clearItems, removeCount, addCount } from '../redux/slices/cartSlice';
+import { useDispatch } from 'react-redux';
+import { removeItem, removeCount, addCount } from '../redux/slices/cartSlice';
 
 export default function CartItem({ id, title, imageUrl, typesName, sizes, price, count }) {
-	const { totalPrice } = useSelector(state => state.cart);
 	const dispatch = useDispatch();
 
 	return (

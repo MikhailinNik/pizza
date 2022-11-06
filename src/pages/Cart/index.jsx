@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearItems } from '../../redux/slices/cartSlice';
+import { clearItems, selectCart } from '../../redux/slices/cartSlice';
 
 import CartItem from '../../components/CartItem';
 import CartEmpty from '../../components/CartEmpty';
@@ -9,7 +9,7 @@ import CartEmpty from '../../components/CartEmpty';
 import styles from './Cart.module.scss';
 
 export default function Cart() {
-	const { items } = useSelector(state => state.cart);
+	const { items } = useSelector(selectCart);
 	const dispatch = useDispatch();
 
 	if (!items.length) {

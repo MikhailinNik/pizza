@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { addItem } from '../../redux/slices/cartSlice';
 
@@ -7,7 +7,6 @@ export const typesName = ['тонкое', 'традиционное'];
 
 export default function Card({ id, title, imageUrl, types, sizes, price }) {
 	const dispatch = useDispatch();
-	const { items } = useSelector(state => state.cart);
 
 	const [count, setCount] = React.useState(0);
 	const [activeClassType, setActiveClassType] = React.useState(0);
