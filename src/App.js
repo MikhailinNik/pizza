@@ -3,23 +3,23 @@ import { Routes, Route } from 'react-router-dom';
 
 import './scss/app.scss';
 
-import Header from './components/Header';
+import Dashboard from './layouts/Dashboard';
+
 import Home from './pages/Home';
 import NotFoundPage from './pages/NotFoundPage';
+import FullCard from './pages/FullCard';
 import Cart from './pages/Cart';
 
 function App() {
 	return (
-		<div className="wrapper">
-			<Header />
-			<div className="content">
-				<Routes>
-					<Route path="/" element={<Home />} />
-					<Route path="*" element={<NotFoundPage />} />
-					<Route path="/cart" element={<Cart />} />
-				</Routes>
-			</div>
-		</div>
+		<Routes>
+			<Route path="/" element={<Dashboard />}>
+				<Route path="" element={<Home />} />
+				<Route path="*" element={<NotFoundPage />} />
+				<Route path="pizza/:id" element={<FullCard />} />
+				<Route path="cart" element={<Cart />} />
+			</Route>
+		</Routes>
 	);
 }
 
